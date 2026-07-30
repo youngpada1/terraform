@@ -27,3 +27,20 @@ Added modules/aws_ingest/tests/aws_ingest.tftest.hcl with 3 run blocks
 Verified with `terraform init` + `terraform test -verbose`:
 Success! 3 passed, 0 failed.
 Commit: `c66f259 feat: add aws_ingest module with terraform_data resources and tests`
+
+## 2026-07-30 — Second module: azure_accounts
+Created modules/azure_accounts (versions.tf, variables.tf, main.tf,
+outputs.tf) simulating user accounts & playlists using terraform_data +
+locals only. required_providers pinned azurerm to `~> 5.0`, corrected
+from an initial (wrong/stale) guess of `~> 3.0` after checking
+https://registry.terraform.io/v1/providers/hashicorp/azurerm/versions,
+which showed 5.0.0 as the current latest version. Environment variable
+validated to dev/prod only, same as aws_ingest. Module takes track_id as
+input (wired from aws_ingest's output by the env root) and produces
+account_id, playlist_id, play_event_id outputs — play_event_id is the
+loose-coupling hook consumed by gcp_analytics per business-rules.md.
+Added modules/azure_accounts/tests/azure_accounts.tftest.hcl with 3 run
+blocks (validation-rejection, plan-only id checks, full apply check).
+Verified with `terraform init` + `terraform test -verbose`:
+Success! 3 passed, 0 failed.
+Commit: (pending)
