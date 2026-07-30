@@ -1,0 +1,21 @@
+formatter: "markdown table"
+
+recursive:
+  enabled: true
+  path: .
+
+sections:
+  hide:
+    - header
+
+output:
+  file: "README.md"
+  mode: inject
+  template: |-
+    <!-- BEGIN_TF_DOCS -->
+    {{ .Content }}
+    <!-- END_TF_DOCS -->
+
+sort:
+  enabled: true
+  by: name
